@@ -16,8 +16,20 @@ jobs:
       - run: |
           echo 'before = ${{ github.event.before }}'
           echo 'after = ${{ github.event.after }}'
-          echo 'git diff --name-only ${{ github.event.before == '0000000000000000000000000000000000000000' && '4b825dc642cb6eb9a060e54bf8d69288fbee4904' || github.event.before }}..${{ github.event.after }}'
-          git diff --name-only ${{ github.event.before == '0000000000000000000000000000000000000000' && '4b825dc642cb6eb9a060e54bf8d69288fbee4904' || github.event.before }}..${{ github.event.after }}
+          echo "git diff --name-only \
+            ${{ github.event.before == '0000000000000000000000000000000000000000'
+              && '4b825dc642cb6eb9a060e54bf8d69288fbee4904'
+              || github.event.before
+            }}..${{
+              github.event.after
+            }}"
+          git diff --name-only \
+            ${{ github.event.before == '0000000000000000000000000000000000000000'
+              && '4b825dc642cb6eb9a060e54bf8d69288fbee4904'
+              || github.event.before
+            }}..${{
+              github.event.after
+            }}
 
 # 4b825dc642cb6eb9a060e54bf8d69288fbee4904 is the SHA-1 hash of an empty tree object (=root)
 # Can be computed like this (independent of a repo):
